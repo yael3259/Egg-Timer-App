@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="he">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egg Timer App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style_app.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div id="app">
+        <h1>Egg Timer App</h1>
+        <button class="enter" id="enter">
+            <a href="./choose_screen.html">start</a>
+        </button>
+    </div>
+
+    <audio id="enter_Sound" src="./sounds/enterence.mp3" preload="auto"></audio>
+
+
+    <script>
+        document.getElementById("enter").addEventListener("click", function(event){
+            event.preventDefault();
+            const enterSound = document.getElementById("enter_Sound");
+            const nextPage = document.querySelector("#enter a").href;
+    
+            enterSound.play().catch(() => {}).finally(() => {
+                setTimeout(() => {
+                    window.location.href = nextPage;
+                }, 500);
+            });
+        });
+    </script>
+     
+
+    <script src="script.js"></script>
+</body>
+
+</html>

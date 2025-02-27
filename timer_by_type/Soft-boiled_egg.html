@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soft-boiled egg timer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap">
+    <link rel="stylesheet" href="../style_app.css">
+    <link rel="stylesheet" href="timer_css.css">
+</head>
+
+<body>
+    <div id="app">
+        <p id="timer">12:00</p>
+    </div>
+
+    <img src="../files/timer_gif/Soft-boiled_egg.gif" id="img_timer">
+
+    <div id="buttons" style="display: none;">
+        <button id="stopButton">stop</button>
+        <button id="snoozeButton">snooze</button>
+    </div>
+
+    <audio id="clickedSound_exit" src="../sounds/exit.mp3" preload="auto"></audio>
+    <audio id="clickedSound_snooze" src="../sounds/snooze.mp3" preload="auto"></audio>
+
+    <audio id="alarmSound" src="../sounds/timer_end.mp3" preload="auto"></audio>
+
+
+
+    <script>
+        let time_remaining = 720;
+        let timerInterval = setInterval(updateTimer, 1000);
+        let alarmPlaying = false;
+
+
+        function updateTimer() {
+            if (time_remaining > 0) {
+                time_remaining--;
+                document.getElementById("timer").textContent =
+                    `${Math.floor(time_remaining / 60)}:${(time_remaining % 60).toString().padStart(2, '0')}`;
+
+                if (time_remaining <= 10) {
+                    document.getElementById("timer").style.color = '#ff2424';
+                    document.getElementById("timer").style.backgroundColor = "black";
+                    document.getElementById("timer").style.borderRadius = "10px";
+                }
+            } else {
+                clearInterval(timerInterval);
+
+                document.getElementById("buttons").style.display = "block";
+
+                playAlarmSound();
+            }
+        }
+
+        function playAlarmSound() {
+            if (!alarmPlaying) {
+                alarmPlaying = true;
+                const alarmSound = document.getElementById("alarmSound");
+                alarmSound.play();
+
+                alarmSound.onended = function () {
+                    alarmPlaying = false;
+                    alarmSound.play();
+                };
+            }
+        }
+
+        document.getElementById("stopButton").addEventListener("click", function () {
+            const alarmSound = document.getElementById("alarmSound");
+            const exitSound = document.getElementById("clickedSound_exit");
+
+            alarmSound.pause();
+            alarmSound.currentTime = 0;
+            exitSound.play();
+
+            exitSound.onended = function () {
+                window.location.href = "../end_screen.html";
+            };
+        })
+
+        document.getElementById("snoozeButton").addEventListener("click", function () {
+            const alarmSound = document.getElementById("alarmSound");
+            const snoozeSound = document.getElementById("clickedSound_snooze");
+
+            snoozeSound.play();
+            alarmSound.pause();
+            alarmSound.currentTime = 0;
+
+            clearInterval(timerInterval);
+
+            time_remaining = 10;
+            alarmPlaying = false;
+
+            timerInterval = setInterval(updateTimer, 1000);
+        });
+
+
+    </script>
+
+    <script src="../script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: url('./files/timer_background.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gif_pic {
+    background-size: cover;
+    background-repeat: repeat;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.image-container {
+    position: relative;
+    text-align: center;
+    border-radius: 15px;
+    width: 35%;
+}
+
+.gif_pic img {
+    width: 90%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+}
+
+.text-overlay {
+    font-family: "Pixelify Sans", serif !important;
+    color: rgb(64, 64, 64);
+    font-size: 16px;
+    padding-bottom: 20px !important;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.fried-egg-container {
+    padding-bottom: 10px !important;
+    background-color: rgba(255, 221, 177, 0.686);
+}
+
+.fried-egg-container:hover {
+    background-color: rgba(255, 221, 177, 0.815);
+}
+
+.hardboiled-egg-container {
+    background-color: rgba(199, 255, 203, 0.716);
+}
+
+.hardboiled-egg-container:hover {
+    background-color: rgba(199, 255, 203, 0.809);
+}
+
+.omelet-container {
+    background-color: rgba(250, 207, 255, 0.609);
+    padding-bottom: 10px;
+}
+
+.omelet-container:hover {
+    background-color: rgba(250, 207, 255, 0.751);
+    padding-bottom: 10px;
+}
+
+.soft-boiled-egg-container {
+    background-color: rgba(178, 254, 255, 0.597);
+    color: rgb(64, 64, 64);
+}
+
+.soft-boiled-egg-container:hover {
+    background-color: rgba(178, 254, 255, 0.743);
+    color: rgb(64, 64, 64);
+}
